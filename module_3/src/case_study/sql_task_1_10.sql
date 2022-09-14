@@ -49,18 +49,15 @@ ORDER BY so_lan_dat_phong; -- xắp sếp
     dv.ten_dich_vu,
     hd.ngay_lam_hop_dong,
     hd.ngay_ket_hop_dong,
- sum(dv.chi_phi_cho_thue + coalesce(sum(hdct.so_luong*dvkt.gia),0)) as tong_tien
+ (ifnull(dv.chi_phi_cho_thue,0)+ SUM(ifnull(hdct.so_luong,0)*ifnull(dvkt.gia,0))) as tong_tien
  from hop_dong hd
 left join khach_hang kh on kh.ma_khach_hang = hd.ma_khach_hang
 left join dich_vu dv on dv.ma_dich_vu = hd.ma_dich_vu
 left join hop_dong_chi_tiet hdct on hdct.ma_hop_dong = hd.ma_hop_dong
-
-
-left join khach_hang kh on kh.ma_loai_khach = lk.ma_loai_khach
-
- left join dich_vu_kem_theo dvkt on dvkt.ma_dich_vu_kem_theo = hdct.ma_dich_vu_kem_theo ;
+left join loai_khach lk on kh.ma_loai_khach = lk.ma_loai_khach
+left join dich_vu_kem_theo dvkt on dvkt.ma_dich_vu_kem_theo = hdct.ma_dich_vu_kem_theo ;
  
- 
+
  
 --  6.	Hiển thị ma_dich_vu, ten_dich_vu, dien_tich, chi_phi_thue,ten_loai_dich_vu
 --  của tất cả các loại dịch vụ chưa từng được khách hàng thực hiện đặt từ
