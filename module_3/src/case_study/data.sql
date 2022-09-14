@@ -44,7 +44,7 @@ INSERT INTO `furama`.`dich_vu_kem_theo` (`ten_dich_vu_kem_theo`, `gia`, `don_vi`
 ( 'Phục vụ'),
 ( 'Quản lý');
 -- loại khach
-INSERT INTO `furama`.`loai_khach` (`ma_loai_khach`, `ten_loai_khach`) VALUES
+INSERT INTO `furama`.`loai_khach` ( `ten_loai_khach`) VALUES
 ('Diamond'),
 ('Platinium'),
 ( 'Gold'),
@@ -63,37 +63,41 @@ INSERT INTO `furama`.`khach_hang` ( `ma_loai_khach`, `ho_va_ten`, `ngay_sinh`, `
 (1, 'Trần Đại Danh', '1994-07-01', 1, '432341235', '0643343433', 'danhhai99@gmail.com', '24 Lý Thường Kiệt, Quảng Ngãi'),
  (2, 'Nguyễn Tâm Đắc', '1989-07-01', 1, '344343432', '0987654321', 'dactam@gmail.com', '22 Ngô Quyền, Đà Nẵng');
  -- Nhân viên
-INSERT INTO `furama`.`nhan_vien` (`ma_nhan_vien`, `ho_va_ten`, `ngay_sinh`, `so_cmnd`, `luong`, `so_dien_thoai`, `emai`, `dia_chi`, `ma_vi_tri`, `ma_trinh_do`, `ma_bo_phan`) VALUES ('1', 'Nguyễn Văn An', '1970-11-07', '456231786', '10000000', '0901234121', 'annguyen@gmail.com', '295 Nguyễn Tất Thành, Đà Nẵng', '1', '3', '1');
-INSERT INTO `furama`.`nhan_vien` (`ma_nhan_vien`, `ho_va_ten`, `ngay_sinh`, `so_cmnd`, `luong`, `so_dien_thoai`, `emai`, `dia_chi`, `ma_vi_tri`, `ma_trinh_do`, `ma_bo_phan`) VALUES ('2', 'Lê Văn Bình', '1997-04-09', '654231234', '7000000', '0934212314', 'binhlv@gmail.com', '22 Yên Bái, Đà Nẵng', '1', '2', '2');
-INSERT INTO `furama`.`nhan_vien` (`ma_nhan_vien`, `ho_va_ten`, `ngay_sinh`, `so_cmnd`, `luong`, `so_dien_thoai`, `emai`, `dia_chi`, `ma_vi_tri`, `ma_trinh_do`, `ma_bo_phan`) VALUES ('3', 'Hồ Thị Yến', '1995-12-12', '999231723', '14000000', '0412352315', 'thiyen@gmail.com', 'K234/11 Điện Biên Phủ, Gia Lai', '1', '3', '2');
-INSERT INTO `furama`.`nhan_vien` (`ma_nhan_vien`, `ho_va_ten`, `ngay_sinh`, `so_cmnd`, `luong`, `so_dien_thoai`, `emai`, `dia_chi`, `ma_vi_tri`, `ma_trinh_do`, `ma_bo_phan`) VALUES ('4', 'Võ Công Toản', '1980-04-04', '123231365', '17000000', '0374443232', 'toan0404@gmail.com', '77 Hoàng Diệu, Quảng Trị', '1', '4', '4');
-INSERT INTO `furama`.`nhan_vien` (`ma_nhan_vien`, `ho_va_ten`, `ngay_sinh`, `so_cmnd`, `luong`, `so_dien_thoai`, `emai`, `dia_chi`, `ma_vi_tri`, `ma_trinh_do`, `ma_bo_phan`) VALUES ('5', 'Nguyễn Bỉnh Phát', '1999-12-09', '454363232', '6000000', '0902341231', 'phatphat@gmail.com', '43 Yên Bái, Đà Nẵng', '2', '1', '1');
-INSERT INTO `furama`.`nhan_vien` (`ma_nhan_vien`, `ho_va_ten`, `ngay_sinh`, `so_cmnd`, `luong`, `so_dien_thoai`, `emai`, `dia_chi`, `ma_vi_tri`, `ma_trinh_do`, `ma_bo_phan`) VALUES ('6', 'Khúc Nguyễn An Nghi', '2000-11-08', '964542311', '7000000', '0978653213', 'annghi20@gmail.com', '294 Nguyễn Tất Thành, Đà Nẵng', '2', '2', '3');
-INSERT INTO `furama`.`nhan_vien` (`ma_nhan_vien`, `ho_va_ten`, `ngay_sinh`, `so_cmnd`, `luong`, `so_dien_thoai`, `emai`, `dia_chi`, `ma_vi_tri`, `ma_trinh_do`, `ma_bo_phan`) VALUES ('7', 'Nguyễn Hữu Hà', '1993-01-01', '534323231', '8000000', '0941234553', 'nhh0101@gmail.com', '4 Nguyễn Chí Thanh, Huế', '2', '3', '2');
-INSERT INTO `furama`.`nhan_vien` (`ma_nhan_vien`, `ho_va_ten`, `ngay_sinh`, `so_cmnd`, `luong`, `so_dien_thoai`, `emai`, `dia_chi`, `ma_vi_tri`, `ma_trinh_do`, `ma_bo_phan`) VALUES ('8', 'Nguyễn Hà Đông', '1989-09-03', '234414123', '9000000', '0642123111', 'donghanguyen@gmail.com', '111 Hùng Vương, Hà Nội', '2', '4', '4');
-INSERT INTO `furama`.`nhan_vien` (`ma_nhan_vien`, `ho_va_ten`, `ngay_sinh`, `so_cmnd`, `luong`, `so_dien_thoai`, `emai`, `dia_chi`, `ma_vi_tri`, `ma_trinh_do`, `ma_bo_phan`) VALUES ('9', 'Tòng Hoang', '1982-09-03', '256781231', '6000000', '0245144444', 'hoangtong@gmail.com', '213 Hàm Nghi, Đà Nẵng', '2', '4', '4');
-INSERT INTO `furama`.`nhan_vien` (`ma_nhan_vien`, `ho_va_ten`, `ngay_sinh`, `so_cmnd`, `luong`, `so_dien_thoai`, `emai`, `dia_chi`, `ma_vi_tri`, `ma_trinh_do`, `ma_bo_phan`) VALUES ('10', 'Nguyễn Công Đạo', '1994-01-08', '755434343', '8000000', '0988767111', 'nguyencongdao12@gmail.com', '6 Hoà Khánh, Đồng Nai', '2', '3', '2');
-
+INSERT INTO `furama`.`nhan_vien` ( `ho_va_ten`, `ngay_sinh`, `so_cmnd`, `luong`, `so_dien_thoai`, `emai`, `dia_chi`, `ma_vi_tri`, `ma_trinh_do`, `ma_bo_phan`) VALUES 
+            ('Nguyễn Văn An', '1970-11-07', '456231786', 10000000, '0901234121', 'annguyen@gmail.com', '295 Nguyễn Tất Thành, Đà Nẵng', 1, 3, 1),
+            ('Lê Văn Bình', '1997-04-09', '654231234', 7000000, '0934212314', 'binhlv@gmail.com', '22 Yên Bái, Đà Nẵng', 1, 2, 2),
+            ('Hồ Thị Yến', '1995-12-12', '999231723', 14000000, '0412352315', 'thiyen@gmail.com', 'K234/11 Điện Biên Phủ, Gia Lai', 1, 3, 2),
+            ( 'Võ Công Toản', '1980-04-04', '123231365', 17000000, '0374443232', 'toan0404@gmail.com', '77 Hoàng Diệu, Quảng Trị', 1, 4, 4),
+            ('Nguyễn Bỉnh Phát', '1999-12-09', '454363232', 6000000, '0902341231', 'phatphat@gmail.com', '43 Yên Bái, Đà Nẵng', 2, 1, 1),
+            ( 'Khúc Nguyễn An Nghi', '2000-11-08', '964542311', 7000000, '0978653213', 'annghi20@gmail.com', '294 Nguyễn Tất Thành, Đà Nẵng', 2, 2, 3),
+            ('Nguyễn Hữu Hà', '1993-01-01', '534323231', 8000000, '0941234553', 'nhh0101@gmail.com', '4 Nguyễn Chí Thanh, Huế', 2, 3, 2),
+            (' Nguyễn Hà Đông','1989-09-03', '234414123', 9000000, '0642123111', 'donghanguyen@gmail.com',' 111 Hùng Vương, Hà Nội', 2, 4, 4),
+            ('Tòng Hoang', '1982-09-03', '256781231', 6000000, '0245144444', 'hoangtong@gmail.com', '213 Hàm Nghi, Đà Nẵng', 2, 4, 4),
+            ( 'Nguyễn Công Đạo', '1994-01-08', '755434343', 8000000, '0988767111', 'nguyencongdao12@gmail.com', '6 Hoà Khánh, Đồng Nai', 2, 3, 2);
 	-- hợp đồng
-INSERT INTO `furama`.`hop_dong` (`ma_hop_dong`, `ngay_lam_hop_dong`, `ngay_ket_hop_dong`, `tien_dat_coc`, `ma_nhan_vien`, `ma_khach_hang`, `ma_dich_vu`) VALUES ('1', '2020-12-08', '2020-12-08', '0', '3', '1', '3');
-INSERT INTO `furama`.`hop_dong` (`ma_hop_dong`, `ngay_lam_hop_dong`, `ngay_ket_hop_dong`, `tien_dat_coc`, `ma_nhan_vien`, `ma_khach_hang`, `ma_dich_vu`) VALUES ('2', '2020-07-14', '2020-07-21', '200000', '7', '3', '1');
-INSERT INTO `furama`.`hop_dong` (`ma_hop_dong`, `ngay_lam_hop_dong`, `ngay_ket_hop_dong`, `tien_dat_coc`, `ma_nhan_vien`, `ma_khach_hang`, `ma_dich_vu`) VALUES ('3', '2021-03-15', '2021-03-17', '50000', '3', '4', '2');
-INSERT INTO `furama`.`hop_dong` (`ma_hop_dong`, `ngay_lam_hop_dong`, `ngay_ket_hop_dong`, `tien_dat_coc`, `ma_nhan_vien`, `ma_khach_hang`, `ma_dich_vu`) VALUES ('4', '2021-01-14', '2021-01-18', '100000', '7', '5', '5');
-INSERT INTO `furama`.`hop_dong` (`ma_hop_dong`, `ngay_lam_hop_dong`, `ngay_ket_hop_dong`, `tien_dat_coc`, `ma_nhan_vien`, `ma_khach_hang`, `ma_dich_vu`) VALUES ('5', '2021-07-14', '2021-07-15', '0', '7', '2', '6');
-INSERT INTO `furama`.`hop_dong` (`ma_hop_dong`, `ngay_lam_hop_dong`, `ngay_ket_hop_dong`, `tien_dat_coc`, `ma_nhan_vien`, `ma_khach_hang`, `ma_dich_vu`) VALUES ('6', '2021-06-01', '2021-06-03', '0', '7', '7', '6');
-INSERT INTO `furama`.`hop_dong` (`ma_hop_dong`, `ngay_lam_hop_dong`, `ngay_ket_hop_dong`, `tien_dat_coc`, `ma_nhan_vien`, `ma_khach_hang`, `ma_dich_vu`) VALUES ('7', '2021-09-02', '2021-09-05', '100000', '7', '4', '4');
-INSERT INTO `furama`.`hop_dong` (`ma_hop_dong`, `ngay_lam_hop_dong`, `ngay_ket_hop_dong`, `tien_dat_coc`, `ma_nhan_vien`, `ma_khach_hang`, `ma_dich_vu`) VALUES ('8', '2021-06-17', '2021-06-18', '150000', '3', '4', '1');
-INSERT INTO `furama`.`hop_dong` (`ma_hop_dong`, `ngay_lam_hop_dong`, `ngay_ket_hop_dong`, `tien_dat_coc`, `ma_nhan_vien`, `ma_khach_hang`, `ma_dich_vu`) VALUES ('9', '2020-11-19', '2020-11-19', '0', '3', '4', '3');
-INSERT INTO `furama`.`hop_dong` (`ma_hop_dong`, `ngay_lam_hop_dong`, `ngay_ket_hop_dong`, `tien_dat_coc`, `ma_nhan_vien`, `ma_khach_hang`, `ma_dich_vu`) VALUES ('10', '2021-04-12', '2021-04-14', '0', '10', '3', '5');
-INSERT INTO `furama`.`hop_dong` (`ma_hop_dong`, `ngay_lam_hop_dong`, `ngay_ket_hop_dong`, `tien_dat_coc`, `ma_nhan_vien`, `ma_khach_hang`, `ma_dich_vu`) VALUES ('11', '2021-04-25', '2021-04-25', '0', '2', '2', '1');
-INSERT INTO `furama`.`hop_dong` (`ma_hop_dong`, `ngay_lam_hop_dong`, `ngay_ket_hop_dong`, `tien_dat_coc`, `ma_nhan_vien`, `ma_khach_hang`, `ma_dich_vu`) VALUES ('12', '2021-05-25', '2021-05-27', '0', '7', '10', '1');
+INSERT INTO `furama`.`hop_dong` (`ngay_lam_hop_dong`, `ngay_ket_hop_dong`, `tien_dat_coc`, `ma_nhan_vien`, `ma_khach_hang`, `ma_dich_vu`) VALUES 
+        ( '2020-12-08', '2020-12-08', 0, 3, 1, 3),
+        ( '2020-07-14', '2020-07-21', 200000, 7, 3, 1),
+        ( '2021-03-15', '2021-03-17', 50000, 3, 4, 2),
+        ( '2021-01-14', '2021-01-18', 100000, 7, 5, 5),
+        ( '2021-07-14', '2021-07-15', 0, 7, 2, 6),
+        ( '2021-06-01', '2021-06-03', 0, 7, 7, 6),
+        ( '2021-09-02', '2021-09-05', 100000, 7, 4, 4),
+        ( '2021-06-17', '2021-06-18', 150000, 3, 4, 1),
+        ( '2020-11-19', '2020-11-19', 0, 3, 4, 3),
+        ('2021-04-12', '2021-04-14', 0, 10, 3, 5),
+        ( '2021-04-25', '2021-04-25', 0, 2, 2, 1),
+        ( '2021-05-25', '2021-05-27', 0, 7, 10, 1);
 -- hợp đồng chi tiết
-INSERT INTO `furama`.`hop_dong_chi_tiet` (`ma_hop_dong_chi_tiet`, `ma_hop_dong`, `ma_dich_vu_kem_theo`, `so_luong`) VALUES ('1', '2', '4', '5');
-INSERT INTO `furama`.`hop_dong_chi_tiet` (`ma_hop_dong_chi_tiet`, `ma_hop_dong`, `ma_dich_vu_kem_theo`, `so_luong`) VALUES ('2', '2', '5', '8');
-INSERT INTO `furama`.`hop_dong_chi_tiet` (`ma_hop_dong_chi_tiet`, `ma_hop_dong`, `ma_dich_vu_kem_theo`, `so_luong`) VALUES ('3', '2', '6', '15');
-INSERT INTO `furama`.`hop_dong_chi_tiet` (`ma_hop_dong_chi_tiet`, `ma_hop_dong`, `ma_dich_vu_kem_theo`, `so_luong`) VALUES ('4', '3', '1', '1');
-INSERT INTO `furama`.`hop_dong_chi_tiet` (`ma_hop_dong_chi_tiet`, `ma_hop_dong`, `ma_dich_vu_kem_theo`, `so_luong`) VALUES ('5', '3', '2', '11');
-INSERT INTO `furama`.`hop_dong_chi_tiet` (`ma_hop_dong_chi_tiet`, `ma_hop_dong`, `ma_dich_vu_kem_theo`, `so_luong`) VALUES ('6', '1', '3', '1');
-INSERT INTO `furama`.`hop_dong_chi_tiet` (`ma_hop_dong_chi_tiet`, `ma_hop_dong`, `ma_dich_vu_kem_theo`, `so_luong`) VALUES ('7', '1', '2', '2');
-INSERT INTO `furama`.`hop_dong_chi_tiet` (`ma_hop_dong_chi_tiet`, `ma_hop_dong`, `ma_dich_vu_kem_theo`, `so_luong`) VALUES ('8', '12', '2', '2');
+INSERT INTO `furama`.`hop_dong_chi_tiet` (`ma_hop_dong_chi_tiet`, `ma_hop_dong`, `ma_dich_vu_kem_theo`, `so_luong`) VALUES
+(1, 2, 4, 5),
+(2, 2, 5, 8),
+(3, 2, 6, 15),
+(4, 3, 1, 1),
+(5, 3, 2, 11),
+(6, 1, 3, 1),
+(7, 1, 2, 2),
+(8, 12, 2, 2);
+
+
 
