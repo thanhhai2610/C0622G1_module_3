@@ -75,6 +75,24 @@ from mark
 		inner join subject on  mark.mark_id = subject.sub_id
 		inner join student on  mark.mark_id = student.student_id
 order by diem desc, student_name asc;
+
+/*Hiển thị tất cả các thông tin môn học (bảng subject) có credit lớn nhất.*/ 
+ select *
+ from subject  sb
+ where sb.credit = (select max(sb.credit) as credit_lon_nha from subject  sb  );
  
+ /*Hiển thị các thông tin môn học có điểm thi lớn nhất.*/
  
+ select sb.* ,m.mark
+ from mark m
+ join subject sb on sb.sub_id = m.sub_id
+ where m.mark = (select max(m.mark) as diem_lon_nha from mark  m  );
+ 
+ /*Hiển thị các thông tin sinh viên và điểm trung bình của mỗi sinh viên, 
+ xếp hạng theo thứ tự điểm giảm dần*/
+ 
+ select s.*, avg(m.mark) as diem_trung_binh 
+ from mark m 
+ join student s on s.student_id = m.student_id
+ group by  s.student_id
  
