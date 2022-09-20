@@ -1,0 +1,22 @@
+ul{
+    background-color: #f44336;
+    padding: 10px;
+}
+ul li {
+    background-color: #ff797b;
+
+    margin: 5px;
+    margin-left: 30px;
+}
+ol {
+    background-color: darkgoldenrod;
+    padding: 10px;
+
+
+}
+ol li {
+    background-color: darkkhaki;
+
+    margin: 5px;
+    margin-left: 30px;
+}

@@ -1,0 +1,21 @@
+h1, hr {
+    margin-bottom: 0;
+}
+
+#bachkhoa {
+    margin-top: 0;
+}
+
+p {
+    text-indent: 30px;
+    font-family: Vn3DH;
+}
+
+.background {
+    background: url("https://png.pngtree.com/thumb_back/fh260/background/20200604/pngtree-vietnam-flag-colored-surrounding-streamers-white-background-image_337349.jpg") no-repeat center center /cover;
+    height: 100vh;
+    width: 100vw;
+}
+div{
+    font-weight: bold;
+}

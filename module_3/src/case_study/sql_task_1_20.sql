@@ -113,9 +113,11 @@ select  kh.ho_va_ten
 from khach_hang kh
 group by kh.ho_va_ten ;
 -- c3
-select  kh.ho_va_ten
+select  kh.ho_va_ten b
 from khach_hang kh
-group by kh.ho_va_ten ;
+UNION
+select  kh.ho_va_ten l
+from khach_hang kh;
  
 -- 9.	Thực hiện thống kê doanh thu theo tháng, nghĩa
 --  là tương ứng với mỗi tháng trong năm 2021 thì sẽ có bao nhiêu khách hàng thực hiện đặt phòng.
@@ -239,8 +241,7 @@ DELETE from nhan_vien
 WHERE NOT EXISTS ( SELECT 
 						 ma_nhan_vien 
 						 FROM hop_dong 
-						 WHERE ma_nhan_vien = nhan_vien.ma_nhan_vien
-                          ) ;
+						 WHERE ma_nhan_vien = nhan_vien.ma_nhan_vien) ;
 SELECT ma_nhan_vien, ho_va_ten FROM nhan_vien;
 
 /*  17.	Cập nhật thông tin những khách hàng có ten_loai_khach từ Platinum lên Diamond, 
@@ -272,8 +273,7 @@ CREATE VIEW delete_hd_truoc_2021 AS
 								SELECT hd .ma_khach_hang, hd.ngay_lam_hop_dong
 								FROM hop_dong hd 
 								WHERE year(hd.ngay_lam_hop_dong ) <2021;
-                        
-SET FOREIGN_KEY_CHECKS = 0;
+SET FOREIGN_KEY_CHECKS = 0; 
 DELETE FROM khach_hang
 WHERE ma_khach_hang IN (SELECT ma_khach_hang FROM  delete_hd_truoc_2021 );
  
@@ -292,13 +292,13 @@ WHERE ma_khach_hang IN (SELECT ma_khach_hang FROM  delete_hd_truoc_2021 );
  
  UPDATE dich_vu_kem_theo
  SET dich_vu_kem_theo.gia = dich_vu_kem_theo.gia*2
- WHERE dich_vu_kem_theo.ma_dich_vu_kem_theo IN (SELECT ma_dich_vu_kem_theo FROM dvkt_sd_tren_10_lan  );
+ WHERE dich_vu_kem_theo.ma_dich_vu_kem_theo IN (SELECT ma_dich_vu_kem_theo FROM dvkt_sd_tren_10_lan);
  
  /*20.	Hiển thị thông tin của tất cả các nhân viên và khách hàng 
  có trong hệ thống, thông tin hiển thị bao gồm id (ma_nhan_vien, ma_khach_hang),
  ho_ten, email, so_dien_thoai, ngay_sinh, dia_chi.*/
  
- SELECT nhan_vien.*,khach_hang.*
+ SELECT nv.*,khach_hang.*
  FROM nhan_vien nv
  JOIN khach_hang
  GROUP BY nv.ma_nhan_vien ;
