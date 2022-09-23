@@ -13,7 +13,8 @@
 }
 
 .search2 {
-    border: 1px solid black;
+
+    border: 1px solid white;
     border-radius: 10px;
 }
 
@@ -31,6 +32,7 @@
 .icon {
     display: flex;
     align-items: center;
+    width: 32%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -38,7 +40,7 @@
 .headerright {
     display: flex;
     align-items: center;
-    width: 25%;
+    margin-right: 26px;
 }
 
 
@@ -52,7 +54,7 @@
 .logohome, .logofriend {
     font-size: 35px;
     height: 66%;
-    width: auto;
+    width: 10%;
     margin: 10px 25px;
     padding-left: 5px;
     color: #3982e4;
@@ -121,10 +123,12 @@ input {
 }
 
 .center {
-    background-color: #eee3cb;
-    width: 50%;
+    width: 48.3%;
     height: 1000vh;
     margin-left: 25%;
+}
+.content{
+    background-color: #eee3cb;
 }
 
 ul {
