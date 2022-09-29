@@ -6,12 +6,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UseDao implements IUseDao {
-
-    private String jdbcURL = "jdbc:mysql://localhost:3306/demo?useSSL=false";
+public class UserDao implements IUseDao {
+    // demo_user_basic_intellij database mình muốn kết nối
+    private String jdbcURL = "jdbc:mysql://localhost:3306/demo_user_basic_intelij?useSSL=false";
     private String jdbcUsername = "root";
-    private String jdbcPassword = "123456";
+    private String jdbcPassword = "12345678Hai$$$";
 
+                                            //insert bên MySql rồi copy code qua đây, rồi đổi value thành dâu "?"
     private static final String INSERT_USERS_SQL = "INSERT INTO users (name, email, country) VALUES (?, ?, ?);";
     private static final String SELECT_USER_BY_ID = "select id,name,email,country from users where id =?";
     private static final String SELECT_ALL_USERS = "select * from users";
@@ -21,25 +22,31 @@ public class UseDao implements IUseDao {
     public void UserDAO() {
     }
 
+    /*Lấy kết nối
+     * khi viết hàm này nó sẽ đăng kí jdbc.Driver(cái ni ở trong thư viện con voi)*/
     protected Connection getConnection() {
         Connection connection = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
+
+            /* Tạo kết nối. DriverManager kết nối tới mấy cái này (jdbcURL, jdbcUsername, jdbcPassword)*/
             connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+
+        } catch (SQLException | ClassNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return connection;
     }
 
-    public void insertUser(User user) throws SQLException {
+
+    public void insertUser(User user) {
         System.out.println(INSERT_USERS_SQL);
         // try-with-resource statement will auto close the connection.
-        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)) {
+        try (Connection connection = getConnection();
+             /* "INSERT INTO users (name, email, country) VALUES (?, ?, ?);" */
+             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)
+        ) {
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getEmail());
             preparedStatement.setString(3, user.getCountry());
@@ -55,7 +62,7 @@ public class UseDao implements IUseDao {
         // Step 1: Establishing a Connection
         try (Connection connection = getConnection();
              // Step 2:Create a statement using connection object
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID);) {
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID)) {
             preparedStatement.setInt(1, id);
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
@@ -82,7 +89,7 @@ public class UseDao implements IUseDao {
         try (Connection connection = getConnection();
 
              // Step 2:Create a statement using connection object
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_USERS);) {
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_USERS)) {
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
@@ -103,7 +110,7 @@ public class UseDao implements IUseDao {
 
     public boolean deleteUser(int id) throws SQLException {
         boolean rowDeleted;
-        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(DELETE_USERS_SQL);) {
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(DELETE_USERS_SQL)) {
             statement.setInt(1, id);
             rowDeleted = statement.executeUpdate() > 0;
         }
@@ -112,7 +119,9 @@ public class UseDao implements IUseDao {
 
     public boolean updateUser(User user) throws SQLException {
         boolean rowUpdated;
-        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(UPDATE_USERS_SQL);) {
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(UPDATE_USERS_SQL)
+        ) {
             statement.setString(1, user.getName());
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getCountry());

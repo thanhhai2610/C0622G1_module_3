@@ -1,4 +1,4 @@
-package svlet_life_cycle;
+package demoServlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

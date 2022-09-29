@@ -5,8 +5,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
 
 @WebServlet(name = "ConverterServlet", value = "/convert")
 public class ConverterServlet extends HttpServlet {
@@ -16,13 +14,13 @@ public class ConverterServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        float rate = Float.parseFloat(request.getParameter("rate"));
-        float usd = Float.parseFloat(request.getParameter("usd"));
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        float rate = Float.parseFloat(req.getParameter("rate"));
+        float usd = Float.parseFloat(req.getParameter("usd"));
 
         float vnd = rate * usd;
 
-        PrintWriter writer = response.getWriter();
+        PrintWriter writer = resp.getWriter();
         writer.println("<html>");
         writer.println("<h1>Rate: " + rate + "</h1>");
         writer.println("<h1>USD: " + usd + "</h1>");
