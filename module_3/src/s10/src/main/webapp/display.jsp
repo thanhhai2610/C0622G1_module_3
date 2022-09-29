@@ -17,7 +17,7 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-<h1>Danh Sách Khách Hàng</h1>
+<h1>Danh Sách Sinh Viên Cá Biệt </h1>
 <table  class="table table-striped">
     <tr>
         <th >

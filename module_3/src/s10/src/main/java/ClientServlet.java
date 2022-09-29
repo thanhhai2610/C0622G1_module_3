@@ -14,12 +14,14 @@ import java.util.List;
 public class ClientServlet extends HttpServlet {
 
     private static List<Client> clients = new ArrayList<>();
+
     static {
-        clients.add(new Client("nguyễn Văn a", "15/04/1950", "Đà Nẵng", "webapp\\Screenshot 2022-09-19 163715.png"));
-        clients.add(new Client("nguyễn Văn b", "15/04/1956", "Đà Nẵng", "https://media.loveitopcdn.com/54/091609-thumb-15222092411420-ds-770.jpg"));
-        clients.add(new Client("nguyễn Văn c", "15/04/1990", "Đà Nẵng", "https://media.loveitopcdn.com/54/091609-thumb-15222092411420-ds-770.jpg"));
-        clients.add(new Client("nguyễn Văn d", "15/04/1998", "Đà Nẵng", "https://media.loveitopcdn.com/54/091609-thumb-15222092411420-ds-770.jpg"));
-        clients.add(new Client("nguyễn Văn e", "15/04/1999", "Đà Nẵng", "https://media.loveitopcdn.com/54/091609-thumb-15222092411420-ds-770.jpg"));
+        clients.add(new Client("Nguyễn Thanh Hải", "26/10/1997", "Duy Xuyên, Quảng Nam", "img\\avata.jpg"));
+        clients.add(new Client("Cát Uyên", "03/08/1999", "THanh Khê, Đà nẵng", "img\\avata.jpg"));
+        clients.add(new Client("Lê Bá Hoàng Giang", "03/08/1999", "Quảng Bình", "img\\avata.jpg"));
+        clients.add(new Client("Quốc Việt", "03/08/1999", "Tam Kì, Quảng Nam", "img\\avata.jpg"));
+        clients.add(new Client("Phạm Quang Vinh ", "03/08/1999", "Lệ THuỷ, Quảng Nam", "img\\avata.jpg"));
+        clients.add(new Client("Thế Sơn ", "03/08/1999", "Vin Home, Đà Nẵng", "img\\avata.jpg"));
     }
 
     @Override
