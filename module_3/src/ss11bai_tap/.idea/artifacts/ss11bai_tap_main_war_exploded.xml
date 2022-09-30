@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="ss11bai_tap.main:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/ss11bai_tap_main_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="ss11bai_tap.main" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="ss11bai_tap.main/web/Web Gradle : ss11bai_tap-1.0-SNAPSHOT.war" />
+    </root>
+  </artifact>
+</component>
