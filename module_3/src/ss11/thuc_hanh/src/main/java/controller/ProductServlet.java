@@ -41,23 +41,26 @@ public class ProductServlet extends HttpServlet {
         }
         switch (action) {
             case "add":
-                showAddListProduct(request,response);
+                showAddListProduct(request, response);
                 break;
             case "delete":
-               delete(request,response);
+                delete(request, response);
                 break;
             case "edit":
-
+                showEditListProduct(request, response);
                 break;
             default:
-                showListProduct(request,response);
+                showListProduct(request, response);
         }
 
     }
 
+
+
+
     private void delete(HttpServletRequest request, HttpServletResponse response) {
-        int id = Integer.parseInt(request.getParameter("id"));
-        productService.remove(id);
+
+        productService.remove(Integer.parseInt(request.getParameter("id")));
         showListProduct(request, response);
 
     }
@@ -70,7 +73,7 @@ public class ProductServlet extends HttpServlet {
         Product product = new Product(id, nameProduct, company, madeIn);
         productService.add(product);
 
-        request.setAttribute("mes", "Thêm mới thành công");
+        request.setAttribute("mess", "Thêm mới thành công");
         showAddListProduct(request, response);
 
     }
@@ -81,6 +84,7 @@ public class ProductServlet extends HttpServlet {
         String company = request.getParameter("company");
         String madeIn = request.getParameter("madeIn");
         Product product = new Product(id, nameProduct, company, madeIn);
+
         productService.update(id, product);
         showListProduct(request, response);
     }
@@ -102,5 +106,14 @@ public class ProductServlet extends HttpServlet {
         }
 
     }
+    private void showEditListProduct(HttpServletRequest request, HttpServletResponse response) {
+        request.setAttribute("editProduct", productService.findById(Integer.parseInt(request.getParameter("id"))));
+        try {
+            request.getRequestDispatcher("view/edit.jsp").forward(request, response);
+        } catch (ServletException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
