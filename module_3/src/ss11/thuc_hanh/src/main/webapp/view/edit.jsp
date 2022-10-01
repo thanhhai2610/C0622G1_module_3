@@ -5,12 +5,11 @@
 <head>
     <title>User Management Application</title>
 </head>
+
 <body>
-
 <div style="text-align: center;">
-    <h1>User Management</h1>
+    <h1>Product Management</h1>
 </div>
-
 <div align="center">
     <form action="/product?action=edit" method="post">
         <table border="1" cellpadding="5">
@@ -54,7 +53,6 @@
                     <input type="submit" value="Save"/>
                 </td>
             </tr>
-
         </table>
     </form>
 

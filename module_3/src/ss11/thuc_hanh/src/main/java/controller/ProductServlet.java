@@ -28,7 +28,7 @@ public class ProductServlet extends HttpServlet {
                 delete(request, response);
                 break;
             case "edit":
-                edit(request, response);
+                update(request, response);
                 break;
         }
     }
@@ -56,8 +56,6 @@ public class ProductServlet extends HttpServlet {
     }
 
 
-
-
     private void delete(HttpServletRequest request, HttpServletResponse response) {
 
         productService.remove(Integer.parseInt(request.getParameter("id")));
@@ -78,7 +76,7 @@ public class ProductServlet extends HttpServlet {
 
     }
 
-    private void edit(HttpServletRequest request, HttpServletResponse response) {
+    private void update(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
         String nameProduct = request.getParameter("nameProduct");
         String company = request.getParameter("company");

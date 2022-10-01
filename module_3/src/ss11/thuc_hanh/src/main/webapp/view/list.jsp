@@ -17,13 +17,12 @@
 </head>
 <body>
 
-<h1>
-    Quản lý Sản Phẩm
-</h1>
-<c:if test="${mess!=null}">
-    <span>${mess}</span>
-</c:if>
-<a href="/product?action=add">Thêm Mới Sản Phẩm </a>
+<div style="text-align: center;">
+    <h1>Product Management</h1> </br>
+    <a href="/product?action=add"><input type="submit" value="Thêm Mới Sản Phẩm"/></a></br></br>
+    <a href="/product?action=add"> <input placeholder="Search" type="text" name="id" size="45"/></a></br></br>
+
+</div>
 <table class="table table-dark">
     <tr>
         <th>STT</th>
