@@ -9,3 +9,4 @@ create table users (
  country varchar(120),
  PRIMARY KEY (id)
 );
+select id,name,email,country from users where name = "thanh hai"

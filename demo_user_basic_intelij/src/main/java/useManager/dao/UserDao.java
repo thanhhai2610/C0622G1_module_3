@@ -4,47 +4,38 @@ import useManager.model.User;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class UserDao implements IUseDao {
-    // demo_user_basic_intellij database mình muốn kết nối
     private String jdbcURL = "jdbc:mysql://localhost:3306/demo_user_basic_intelij?useSSL=false";
     private String jdbcUsername = "root";
     private String jdbcPassword = "12345678Hai$$$";
 
-                                            //insert bên MySql rồi copy code qua đây, rồi đổi value thành dâu "?"
     private static final String INSERT_USERS_SQL = "INSERT INTO users (name, email, country) VALUES (?, ?, ?);";
     private static final String SELECT_USER_BY_ID = "select id,name,email,country from users where id =?";
-    private static final String SELECT_ALL_USERS = "select * from users";
+    private static final String SELECT_USER_BY_NAME = "select id,name,email,country from users where name = ?";
+    private static final String SELECT_ALL_USERS = "select * from users order by name ";
     private static final String DELETE_USERS_SQL = "delete from users where id = ?;";
     private static final String UPDATE_USERS_SQL = "update users set name = ?,email= ?, country =? where id = ?;";
 
     public void UserDAO() {
     }
 
-    /*Lấy kết nối
-     * khi viết hàm này nó sẽ đăng kí jdbc.Driver(cái ni ở trong thư viện con voi)*/
     protected Connection getConnection() {
         Connection connection = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-
-            /* Tạo kết nối. DriverManager kết nối tới mấy cái này (jdbcURL, jdbcUsername, jdbcPassword)*/
             connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
-
         } catch (SQLException | ClassNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return connection;
     }
 
-
     public void insertUser(User user) {
         System.out.println(INSERT_USERS_SQL);
-        // try-with-resource statement will auto close the connection.
         try (Connection connection = getConnection();
-             /* "INSERT INTO users (name, email, country) VALUES (?, ?, ?);" */
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)
         ) {
             preparedStatement.setString(1, user.getName());
@@ -59,16 +50,10 @@ public class UserDao implements IUseDao {
 
     public User selectUser(int id) {
         User user = null;
-        // Step 1: Establishing a Connection
         try (Connection connection = getConnection();
-             // Step 2:Create a statement using connection object
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID)) {
             preparedStatement.setInt(1, id);
-            System.out.println(preparedStatement);
-            // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
-
-            // Step 4: Process the ResultSet object.
             while (rs.next()) {
                 String name = rs.getString("name");
                 String email = rs.getString("email");
@@ -81,20 +66,23 @@ public class UserDao implements IUseDao {
         return user;
     }
 
+    public List<User> selectUserName(String name) {
+        List<User> userList = selectAllUsers();
+        List<User> searchUser = new ArrayList<>();
+        for (User user : userList) {
+            if (user.getName().contains(name)) {
+                searchUser.add(user);
+            }
+        }
+        return searchUser;
+
+    }
+
     public List<User> selectAllUsers() {
-
-        // using try-with-resources to avoid closing resources (boiler plate code)
         List<User> users = new ArrayList<>();
-        // Step 1: Establishing a Connection
         try (Connection connection = getConnection();
-
-             // Step 2:Create a statement using connection object
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_USERS)) {
-            System.out.println(preparedStatement);
-            // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
-
-            // Step 4: Process the ResultSet object.
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
@@ -105,8 +93,10 @@ public class UserDao implements IUseDao {
         } catch (SQLException e) {
             printSQLException(e);
         }
+//        Collections.sort(users);
         return users;
     }
+
 
     public boolean deleteUser(int id) throws SQLException {
         boolean rowDeleted;
@@ -126,7 +116,6 @@ public class UserDao implements IUseDao {
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getCountry());
             statement.setInt(4, user.getId());
-
             rowUpdated = statement.executeUpdate() > 0;
         }
         return rowUpdated;

@@ -6,11 +6,30 @@
     <title>User Management Application</title>
 </head>
 <body>
+
 <div style="text-align: center;">
     <h1>User Management</h1>
     <h2>
         <a href="/users?action=create">Add New User</a>
     </h2>
+    <center>
+        <form action="/users?action=searchName" method="post">
+            <table border="1" cellpadding="5">
+                <tr>
+                    <td>
+                        <input type="submit" value="Search Name"/>
+                    </td>
+                    <td>
+                        <input placeholder="Search" type="text" name="name" size="45"/>
+                    </td>
+                </tr>
+                </tr>
+            </table>
+            <c:if test="${listUser.size()==0}">
+                <p>Khong tim thay</p>
+            </c:if>
+        </form>
+    </center>
 </div>
 <div align="center">
     <table border="1" cellpadding="5">
@@ -22,9 +41,9 @@
             <th>Country</th>
             <th>Actions</th>
         </tr>
-        <c:forEach var="user" items="${requestScope.listUser}">
+        <c:forEach var="user" items="${listUser}">
             <tr>
-                <td><c:out value="${user.id}"/></td>
+                <td><a href="/users?action=view&id=${user.id}"><c:out value="${user.id}"/> </a></td>
                 <td><c:out value="${user.name}"/></td>
                 <td><c:out value="${user.email}"/></td>
                 <td><c:out value="${user.country}"/></td>
