@@ -22,7 +22,7 @@ public class UserService implements IUseService {
     }
 
     public List<User> selectUserName(String name) {
-        return useDao.selectUserName(name);
+        return useDao.selectUserName("%" + name + "%");
     }
 
     @Override

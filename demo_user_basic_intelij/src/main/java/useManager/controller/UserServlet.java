@@ -71,7 +71,6 @@ public class UserServlet extends HttpServlet {
     }
 
     private void showSearchName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         request.setAttribute("listUser", userService.selectUserName(request.getParameter("name")));
         RequestDispatcher dispatcher = request.getRequestDispatcher("user/list.jsp");
         dispatcher.forward(request, response);

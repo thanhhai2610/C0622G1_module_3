@@ -4,7 +4,6 @@ import useManager.model.User;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class UserDao implements IUseDao {
@@ -14,7 +13,9 @@ public class UserDao implements IUseDao {
 
     private static final String INSERT_USERS_SQL = "INSERT INTO users (name, email, country) VALUES (?, ?, ?);";
     private static final String SELECT_USER_BY_ID = "select id,name,email,country from users where id =?";
-    private static final String SELECT_USER_BY_NAME = "select id,name,email,country from users where name = ?";
+
+    private static final String SELECT_USER_BY_NAME = "select id,name,email,country from users where name like ? order  by name ";
+
     private static final String SELECT_ALL_USERS = "select * from users order by name ";
     private static final String DELETE_USERS_SQL = "delete from users where id = ?;";
     private static final String UPDATE_USERS_SQL = "update users set name = ?,email= ?, country =? where id = ?;";
@@ -67,16 +68,34 @@ public class UserDao implements IUseDao {
     }
 
     public List<User> selectUserName(String name) {
-        List<User> userList = selectAllUsers();
-        List<User> searchUser = new ArrayList<>();
-        for (User user : userList) {
-            if (user.getName().contains(name)) {
-                searchUser.add(user);
+        List<User> userList = new ArrayList<>();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_NAME);) {
+            preparedStatement.setString(1,name);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                name = rs.getString("name");
+                String email = rs.getString("email");
+                String country = rs.getString("country");
+                userList.add(new User(id, name, email, country));
             }
+        } catch (SQLException e) {
+            printSQLException(e);
         }
-        return searchUser;
-
+        return userList;
     }
+//    public List<User> selectUserName(String name) {
+//        List<User> userList = selectAllUsers();
+//        List<User> searchUser = new ArrayList<>();
+//        for (User user : userList) {
+//            if (user.getName().contains(name)) {
+//                searchUser.add(user);
+//            }
+//        }
+//        return searchUser;
+//
+//    }
 
     public List<User> selectAllUsers() {
         List<User> users = new ArrayList<>();
