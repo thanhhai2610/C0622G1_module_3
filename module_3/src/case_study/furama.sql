@@ -1,27 +1,28 @@
-drop database if exists Furama;
-create database  Furama;
-use Furama;
-create table vi_tri(
-ma_vi_tri int primary key auto_increment,
-ten_vi_tri varchar(45)
+drop database if exists Furama_case_study_2;
+create database  Furama_case_study_2;
+use Furama_case_study_2;
+
+create table position (
+id int primary key auto_increment,
+name varchar(45)
 );
-create table trinh_do(
-ma_trinh_do int primary key auto_increment,
-ten_trinh_do varchar(45)
+create table education_degree (
+id int primary key auto_increment,
+name varchar(45)
 );
-create table bo_phan(
-ma_bo_phan int primary key auto_increment,
-ten_bo_phan varchar(45)
+create table division(
+id int primary key auto_increment,
+name varchar(45)
 );
-create table loai_khach(
-ma_loai_khach int primary key auto_increment,
-ten_loai_khach varchar(45)
+create table customer_type(
+id int primary key auto_increment,
+name varchar(45)
 );
-create table kieu_thue(
-ma_kieu_thue int primary key auto_increment,
-ten_kieu_thue varchar(45)
+create table rent_type (
+id int primary key auto_increment,
+name varchar(45)
 );
-create table loai_dich_vu(
+create table facility_type (
 ma_loai_dich_vu int primary key auto_increment,
 ten_loai_dich_vu varchar(45)
 );
