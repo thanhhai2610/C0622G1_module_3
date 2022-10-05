@@ -1,4 +1,4 @@
 package model.person;
 
-public class person {
+public class Employee {
 }

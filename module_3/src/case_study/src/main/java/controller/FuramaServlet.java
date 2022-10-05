@@ -23,23 +23,34 @@ public class FuramaServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
-            case "create":
-
+            case "villa":
+                villa(request, response);
                 break;
-            case "edit":
-
+            case "house":
+                house(request, response);
                 break;
-            case "view":
-
+            case "room":
+                room(request, response);
                 break;
-            case "delete":
-
-                break;
-
             default:
                 home(request, response);
                 break;
         }
+    }
+
+    private void house(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/furama/facility/house/house.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void room(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/furama/facility/room/room.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void villa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/furama/facility/villa/villa.jsp");
+        dispatcher.forward(request, response);
     }
 
     private void home(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
