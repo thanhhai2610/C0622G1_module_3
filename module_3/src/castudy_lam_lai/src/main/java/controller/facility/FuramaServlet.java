@@ -1,5 +1,9 @@
 package controller.facility;
 
+import model.person.Employee;
+import service.person.IEmployeeService;
+import service.person.impl.EmployeeService;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,9 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet(name = "FuramaServlet", urlPatterns = "/home")
 public class FuramaServlet extends HttpServlet {
+    IEmployeeService employeeService = new EmployeeService();
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
@@ -44,7 +51,12 @@ public class FuramaServlet extends HttpServlet {
         }
     }
 
+    // CHUYỂN TRANG ĐẾN EMPLOYEE.JSP
     private void employee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        List<Employee> employeeList = employeeService.selectAllEmployee();
+
+        request.setAttribute("employeeList",employeeList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/furama/person/employee/employee.jsp");
         dispatcher.forward(request, response);
     }
