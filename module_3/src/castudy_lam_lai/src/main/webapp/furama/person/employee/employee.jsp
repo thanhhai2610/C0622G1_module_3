@@ -1,11 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Admin
-  Date: 10/05/2022
-  Time: 9:47 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -35,10 +28,16 @@
                 <div class="collapse navbar-collapse" id="navbarScroll">
                     <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                         <li class="nav-item">
-                            <a style="padding-top: 26%; width: 150px; height: 100px; font-size: 30px;"
+                            <a style="    padding-top: 31%; width: 120px; height: 100px; font-size: 30px;"
                                class="nav-link active px-2"
                                aria-current="page"
                                href="/home">Home </a>
+                        </li>
+                        <li class="nav-item">
+                            <a style="padding-top: 22%; width: 170px; height: 100px; font-size: 30px;"
+                               class="nav-link active px-2"
+                               aria-current="page"
+                               href="/employee">Employee </a>
                         </li>
                         <li class="nav-item">
                             <a style="padding-top: 13%; width: 300px; height: 100px; font-size: 30px;"
@@ -50,12 +49,14 @@
 
                     </ul>
 
-                    <form class="d-flex mx-3" role="search">
+                    <div class="d-flex mx-3" role="search">
                         <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll"
                             style="--bs-scroll-height: 100px;">
                             <li style="position: relative;" class="nav-item dropdown d-flex">
-                                <form action="#search" method="post">
-                                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                                <form action="/employee?action=search" method="post">
+                                    <input name="searchName" class="form-control me-2" type="search"
+                                           placeholder="Search"
+                                           aria-label="Search">
                                     <svg style=" position:absolute; right:16px; top: 3px;"
                                          xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                          class="bi bi-search mt-2"
@@ -68,35 +69,20 @@
                                 </form>
                             </li>
                         </ul>
+                    </div>
 
-                    </form>
+
                 </div>
             </div>
         </nav>
     </div>
 
     <div class="row mx-0 position-relative " style="height: 90%;margin-top: 0">
-        <c:if test="${mess!=null}">
-            <div aria-live="polite" aria-atomic="true" class="position-relative">
-                <div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="toast-header">
-                        <svg class="bd-placeholder-img rounded me-2" width="20" height="20"
-                             xmlns="http://www.w3.org/2000/svg"
-                             aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                            <rect width="100%" height="100%" fill="#007aff"></rect>
-                        </svg>
-                        <strong class="me-auto"><span style="vertical-align: inherit;"><span
-                                style="vertical-align: inherit;">Create Product</span></span></strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Đóng"></button>
-                    </div>
-                    <div class="toast-body"><span style="vertical-align: inherit;"><span
-                            style="vertical-align: inherit;">
-                   <strong> ${mess}</strong> </span></span></div>
-                </div>
-            </div>
-        </c:if>
+
         <div align="center">
             <caption><h2>List Employee</h2></caption>
+
+
 
             <table id="product_table" class="table table-striped table-bordered" style="width: 100%">
                 <thead>
@@ -137,102 +123,175 @@
                                     data-bs-target="#update${data.id}">
                                 Chỉnh sửa
                             </button>
+                                        <div class="modal fade" id="update${data.id}" tabindex="-1"
+                                             aria-labelledby="exampleModalLabel"
+                                             aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel-update"> Nhân viên</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Chỉnh sửa Nhân viên <strong>${data.name}</strong>:
 
+                                                        <form action="/employee?action=edit&id=${data.id}" method="post">
+                                                            <fieldset>
+                                                                <legend>Thông tin Nhân viên</legend>
+                                                                <table class="table table-striped table-bordered"
+                                                                       style="width: 100%">
+                                                                    <tr>
+                                                                        <th>Name Nhân viên :</th>
+                                                                        <td>
+                                                                            <input type="text" name="name"
+                                                                                   value="${data.name}"/>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>Ngày tháng năm sinh :</th>
+                                                                        <td>
+                                                                            <input type="text" name="birthday"
+                                                                                   value="${data.birthday}"/>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>CMND :</th>
+                                                                        <td>
+                                                                            <input type="text" name="idCard"
+                                                                                   value="${data.idCard}"/>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>Lương :</th>
+                                                                        <td>
+                                                                            <input type="text" name="salary"
+                                                                                   value="${data.salary}"/>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>Phone :</th>
+                                                                        <td>
+                                                                            <input type="text" name="phone"
+                                                                                   value="${data.phone}"/>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>Email :</th>
+                                                                        <td>
+                                                                            <input type="text" name="email"
+                                                                                   value="${data.email}"/>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>Address :</th>
+                                                                        <td>
+                                                                            <input type="text" name="address"
+                                                                                   value="${data.address}"/>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>Position Id :</th>
+                                                                        <td>
+                                                                            <input type="text" name="positionId"
+                                                                                   value="${data.positionId}"/>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>Education Degree Id :</th>
+                                                                        <td>
+                                                                            <input type="text" name="educationDegreeId"
+                                                                                   value="${data.educationDegreeId}"/>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>Division Id :</th>
+                                                                        <td>
+                                                                            <input type="text" name="divisionId"
+                                                                                   value="${data.divisionId}"/>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>username :</th>
+                                                                        <td>
+                                                                            <input type="text" name="username"
+                                                                                   value="${data.username}"/>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </fieldset>
+                                                            <div class="modal-footer">
+                                                                <a href="/users" class="btn btn-secondary" data-bs-dismiss="modal">Hủy
+                                                                    bỏ</a>
+                                                                <input type="submit" value="Xác nhận" class="btn btn-warning">
+
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                     data-bs-target="#delete${data.id}">Xóa
                             </button>
-                            <div class="modal fade" id="delete${data.id}" tabindex="-1"
-                                 aria-labelledby="exampleModalLabel"
-                                 aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel-delete">Xóa Sản Phẩm</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Xóa sản phẩm <strong>${data.name}</strong>?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <a href="/users?" class="btn btn-secondary" data-bs-dismiss="modal">Hủy
-                                                bỏ</a>
-                                            <a class="btn btn-danger"
-                                               href="#">Delete</a>
-                                                <%--                                            /users?action=delete&id=${data.id}--%>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
+                                        <div class="modal fade" id="delete${data.id}" tabindex="-1"
+                                             aria-labelledby="exampleModalLabel"
+                                             aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel-delete">Xóa nhân viên</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Xóa nhân viên <strong>${data.name}</strong>?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <a href="/employee" class="btn btn-secondary" data-bs-dismiss="modal">Hủy
+                                                            bỏ</a>
+                                                        <a class="btn btn-danger"
+                                                           href="/employee?action=delete&id=${data.id}">Delete</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                         </td>
+
                     </tr>
                 </c:forEach>
+
                 </tbody>
 
             </table>
         </div>
 
-
-    </div>
-
-</div>
-
-<div class="modal fade" id="update${data.id}" tabindex="-1"
-     aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel-update"> sản phẩm</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Chỉnh sửa sản phẩm <strong>${data.name}</strong>:
-                <form action="/users?action=edit&id=${data.id}" method="post">
-                    <fieldset>
-                        <legend>Thông tin sản phẩm</legend>
-                        <table class="table table-striped table-bordered"
-                               style="width: 100%">
-                            <tr>
-                                <th>User Name:</th>
-                                <td>
-                                    <input type="text" name="name"
-                                           value="<c:out value='${data.name}' />"
-                                    />
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>User Email:</th>
-                                <td>
-                                    <input type="text" name="email"
-                                           value="<c:out value='${data.email}' />"
-                                    />
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Country:</th>
-                                <td>
-                                    <input type="text" name="country"
-                                           value="<c:out value='${data.country}' />"
-                                    />
-                                </td>
-                            </tr>
-                        </table>
-                    </fieldset>
-                    <div class="modal-footer">
-                        <a href="/users" class="btn btn-secondary" data-bs-dismiss="modal">Hủy
-                            bỏ</a>
-                        <input type="submit" value="Xác nhận" class="btn btn-warning">
-
+        <c:if test="${mess!=null}">
+            <div aria-live="polite" aria-atomic="true" class="position-relative">
+                <div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <svg class="bd-placeholder-img rounded me-2" width="20" height="20"
+                             xmlns="http://www.w3.org/2000/svg"
+                             aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                            <rect width="100%" height="100%" fill="#007aff"></rect>
+                        </svg>
+                        <strong class="me-auto"><span style="vertical-align: inherit;"><span
+                                style="vertical-align: inherit;">Create Product</span></span></strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Đóng"></button>
                     </div>
-                </form>
+                    <div class="toast-body"><span style="vertical-align: inherit;"><span
+                            style="vertical-align: inherit;">
+                   <strong> ${mess}</strong> </span></span></div>
+                </div>
             </div>
-        </div>
+        </c:if>
+
     </div>
+
 </div>
+
 
 <script src="jquery/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

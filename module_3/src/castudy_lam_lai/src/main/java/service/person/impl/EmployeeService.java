@@ -9,6 +9,7 @@ import java.util.List;
 
 public class EmployeeService implements IEmployeeService {
     IEmployeeRepo employeeRepo = new EmployeeRepo();
+
     @Override
     public void insertEmployee(Employee employee) {
         employeeRepo.insertEmployee(employee);
@@ -17,6 +18,10 @@ public class EmployeeService implements IEmployeeService {
     @Override
     public List<Employee> selectAllEmployee() {
         return employeeRepo.selectAllEmployee();
+    }
+
+    public List<Employee> selectEmployeeName(String name) {
+        return employeeRepo.selectEmployeeName(name);
     }
 
     @Override

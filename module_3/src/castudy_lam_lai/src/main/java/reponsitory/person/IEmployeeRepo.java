@@ -9,6 +9,8 @@ public interface IEmployeeRepo {
 
     public List<Employee> selectAllEmployee();
 
+    public List<Employee> selectEmployeeName(String name);
+
     public boolean deleteEmployee(int id);
 
     public boolean updateEmployee(Employee employee);

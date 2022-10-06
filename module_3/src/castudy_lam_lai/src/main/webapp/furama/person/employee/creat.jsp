@@ -36,10 +36,16 @@
                 <div class="collapse navbar-collapse" id="navbarScroll">
                     <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                         <li class="nav-item">
-                            <a style="padding-top: 26%; width: 150px; height: 100px; font-size: 30px;"
+                            <a style="    padding-top: 31%; width: 120px; height: 100px; font-size: 30px;"
                                class="nav-link active px-2"
                                aria-current="page"
                                href="/home">Home </a>
+                        </li>
+                        <li class="nav-item">
+                            <a style="padding-top: 22%; width: 170px; height: 100px; font-size: 30px;"
+                               class="nav-link active px-2"
+                               aria-current="page"
+                               href="/employee">Employee </a>
                         </li>
                         <li class="nav-item">
                             <a style="padding-top: 13%; width: 300px; height: 100px; font-size: 30px;"
@@ -51,62 +57,17 @@
 
                     </ul>
 
-                    <form class="d-flex mx-3" role="search">
-                        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll"
-                            style="--bs-scroll-height: 100px;">
-                            <li style="position: relative;" class="nav-item dropdown d-flex">
-                                <form action="#search" method="post">
-                                    <input class="form-control me-2" type="search" placeholder="Search"
-                                           aria-label="Search">
-                                    <svg style=" position:absolute; right:16px; top: 3px;"
-                                         xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                         class="bi bi-search mt-2"
-                                         viewBox="0 0 16 16">
-                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                                    </svg>
-                                    <%--                    <c:if test="${employeeList.size()==0}">--%>
-                                    <%--                        <p>Khong tim thay</p>--%>
-                                    <%--                    </c:if>--%>
-                                </form>
-                            </li>
-                        </ul>
 
-                    </form>
 
                 </div>
             </div>
         </nav>
     </div>
 
-    <c:if test="${mess!=null}">
-        <div aria-live="polite" aria-atomic="true" class="position-relative">
-            <div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header">
-                    <svg class="bd-placeholder-img rounded me-2" width="20" height="20"
-                         xmlns="http://www.w3.org/2000/svg"
-                         aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <rect width="100%" height="100%" fill="#007aff"></rect>
-                    </svg>
-                    <strong class="me-auto"><span style="vertical-align: inherit;"><span
-                            style="vertical-align: inherit;">Create Product</span></span></strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Đóng"></button>
-                </div>
-                <div class="toast-body"><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">
-                   <strong> ${mess}</strong> </span></span></div>
-            </div>
-        </div>
-    </c:if>
-
     <div align="center">
         <form action="/employee?action=create" method="post">
             <table border="1" cellpadding="5">
 
-                <tr>
-                    <th>ID:</th>
-                    <td>
-                        <input type="text" name="id" id="id" size="45"/>
-                    </td>
-                </tr>
                 <tr>
                     <th>Name:</th>
                     <td>
@@ -182,7 +143,27 @@
             </table>
 
         </form>
+
     </div>
+
+    <c:if test="${mess!=null}">
+        <div aria-live="polite" aria-atomic="true" class="position-relative">
+            <div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <svg class="bd-placeholder-img rounded me-2" width="20" height="20"
+                         xmlns="http://www.w3.org/2000/svg"
+                         aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <rect width="100%" height="100%" fill="#007aff"></rect>
+                    </svg>
+                    <strong class="me-auto"><span style="vertical-align: inherit;"><span
+                            style="vertical-align: inherit;">Create Product</span></span></strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Đóng"></button>
+                </div>
+                <div class="toast-body"><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">
+                   <strong> ${mess}</strong> </span></span></div>
+            </div>
+        </div>
+    </c:if>
 
 </div>
 

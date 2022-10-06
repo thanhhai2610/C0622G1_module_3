@@ -31,23 +31,11 @@ public class EmployeeServlet extends HttpServlet {
             case "create":
                 addEmployee(request, response);
                 break;
-            default:
-                employeeList(request, response);
+            case "edit":
+                editEmployee(request, response);
                 break;
-        }
-    }
-
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
-        String action = request.getParameter("action");
-        if (action == null) {
-            action = "";
-        }
-        switch (action) {
-            case "create":
-                showAddEmployee(request, response);
+            case "search":
+                searchEmployee(request, response);
                 break;
             default:
                 employeeList(request, response);
@@ -55,8 +43,7 @@ public class EmployeeServlet extends HttpServlet {
         }
     }
 
-    private void addEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // nhận dữ liệu input từ form
+    private void editEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
         String birthday = request.getParameter("birthday");
@@ -69,7 +56,29 @@ public class EmployeeServlet extends HttpServlet {
         int educationDegreeId = Integer.parseInt(request.getParameter("educationDegreeId"));
         int divisionId = Integer.parseInt(request.getParameter("divisionId"));
         String username = request.getParameter("username");
-        Employee employee = new Employee(id ,name, birthday, idCard, salary,
+        Employee employee = new Employee(name, birthday, idCard, salary,
+                phone, email, address, positionId, educationDegreeId, divisionId, username);
+        employeeService.updateEmployee(employee);
+        request.setAttribute("mess", "Chỉnh sửa  thành công");
+        employeeList(request,response);
+
+    }
+
+    private void addEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // nhận dữ liệu input từ form
+//        int id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+        String birthday = request.getParameter("birthday");
+        String idCard = request.getParameter("idCard");
+        double salary = Double.parseDouble((request.getParameter("salary")));
+        String phone = request.getParameter("phone");
+        String email = request.getParameter("email");
+        String address = request.getParameter("address");
+        int positionId = Integer.parseInt(request.getParameter("positionId"));
+        int educationDegreeId = Integer.parseInt(request.getParameter("educationDegreeId"));
+        int divisionId = Integer.parseInt(request.getParameter("divisionId"));
+        String username = request.getParameter("username");
+        Employee employee = new Employee(name, birthday, idCard, salary,
                 phone, email, address, positionId, educationDegreeId, divisionId, username);
 
         employeeService.insertEmployee(employee);
@@ -78,11 +87,48 @@ public class EmployeeServlet extends HttpServlet {
         showAddEmployee(request, response);
     }
 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        String action = request.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+        switch (action) {
+            case "create":
+                showAddEmployee(request, response);
+                break;
+            case "delete":
+                delete(request, response);
+                break;
+            default:
+                employeeList(request, response);
+                break;
+        }
+    }
+
+    private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        employeeService.deleteEmployee(Integer.parseInt(request.getParameter("id")));
+
+        employeeList(request, response);
+
+    }
+
+
     private void showAddEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/furama/person/employee/creat.jsp");
         dispatcher.forward(request, response);
     }
 
+    private void searchEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        List<Employee> employeeList = employeeService.selectEmployeeName(request.getParameter("searchName"));
+        request.setAttribute("employeeList", employeeList);
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/furama/person/employee/employee.jsp");
+        dispatcher.forward(request, response);
+    }
 
     private void employeeList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

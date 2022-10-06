@@ -62,6 +62,7 @@ position_id int,
 education_degree_id int,
 division_id int,
 username VARCHAR(255),
+status_display bit default 0,
 FOREIGN KEY (username) REFERENCES user(username),
 FOREIGN KEY(position_id) REFERENCES position (id),
 FOREIGN KEY(education_degree_id) REFERENCES division (id),
@@ -229,10 +230,32 @@ INSERT INTO `furama_case_study_2`.`employee` ( `name`,`date_of_birth`,`id_card`,
 (7, 1, 2, 2),
 (8, 12, 2, 2);
 
+select * from facility order by name;
+INSERT INTO `furama_case_study_2`.`employee` (`name`, `date_of_birth`, `id_card`, `salary`, `phone_number`, `emai`, `eddress`, `position_id`, `education_degree_id`, `division_id`, `username`) VALUES ('Nguyễn Thanh Hải2', '1994-01-08', '755434343', '17000000', '0988767111', 'thanhai@gmail.com', '213 Hàm Nghi, Đà Nẵng', '2', '3', '1', NULL);
+SELECT * FROM employee WHERE name like "%thAn%";
 
 
 
+DELIMITER $$
+CREATE PROCEDURE DELETE_EMPLOYEE(in id_delete int)
+BEGIN
+update employee 
+set status_display = 1
+where id =id_delete;
+end $$
+DELIMITER ;
 
+select * from employee 
+where status_display = 0;
+
+DELIMITER $$
+CREATE PROCEDURE EDIT_EMPLOYEE(in id_delete int)
+BEGIN
+update employee 
+set status_display = 1
+where id =id_delete;
+end $$
+DELIMITER ;
 
 
 
