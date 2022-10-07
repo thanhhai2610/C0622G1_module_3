@@ -58,7 +58,6 @@
                     </ul>
 
 
-
                 </div>
             </div>
         </nav>
@@ -77,7 +76,7 @@
                 <tr>
                     <th>BIRTH DAY:</th>
                     <td>
-                        <input type="text" name="birthday" id="birthday" size="45"/>
+                        <input type="date" name="birthday" id="birthday" style="width: 100%;"/>
                     </td>
                 </tr>
                 <tr>
@@ -113,25 +112,47 @@
                 <tr>
                     <th>ID POSITION:</th>
                     <td>
-                        <input type="text" name="positionId" id="positionId" size="45"/>
+<%--                        <input type="text" name="positionId" id="positionId" size="45"/>--%>
+                        <select name="positionId" id="positionId" style="width: 100%;">
+                            <option value="1">Lễ tân</option>
+                            <option value="2">Phục vụ</option>
+                            <option value="3">Giám sát</option>
+                            <option value="4">Chuyên viên</option>
+                            <option value="5">Quản lý</option>
+                            <option value="6">Giám đốc</option>
+                        </select>
+
                     </td>
                 </tr>
                 <tr>
                     <th>ID EDUCATION DEGREE:</th>
                     <td>
-                        <input type="text" name="educationDegreeId" id="educationDegreeId" size="45"/>
+<%--                        <input type="text" name="educationDegreeId" id="educationDegreeId" size="45"/>--%>
+
+                        <select name="educationDegreeId" id="educationDegreeId" style="width: 100%;">
+                            <option value="1">Trung cấp</option>
+                            <option value="2">Cao đẳng</option>
+                            <option value="3">Đại học</option>
+                            <option value="4">sau ĐẠi học</option>
+                        </select>
                     </td>
                 </tr>
                 <tr>
                     <th>ID DIVISION:</th>
                     <td>
-                        <input type="text" name="divisionId" id="divisionId" size="45"/>
+<%--                        <input type="text" name="divisionId" id="divisionId" size="45"/>--%>
+                        <select name="divisionId" id="divisionId" style="width: 100%;">
+                            <option value="1">Sale – Marketing</option>
+                            <option value="1">Hành Chính</option>
+                            <option value="1">Phục vụ</option>
+                            <option value="1">Quản lý</option>
+                        </select>
                     </td>
                 </tr>
                 <tr>
                     <th>ID USERNAME:</th>
                     <td>
-                        <input type="text" name="name" id="username" size="45"/>
+                        <input type="text" name="username" id="username" size="45"/>
                     </td>
                 </tr>
 

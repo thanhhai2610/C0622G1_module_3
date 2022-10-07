@@ -63,9 +63,6 @@
                                          viewBox="0 0 16 16">
                                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                                     </svg>
-                                    <%--                    <c:if test="${employeeList.size()==0}">--%>
-                                    <%--                        <p>Khong tim thay</p>--%>
-                                    <%--                    </c:if>--%>
                                 </form>
                             </li>
                         </ul>
@@ -73,15 +70,16 @@
 
 
                 </div>
+
             </div>
         </nav>
+
     </div>
 
     <div class="row mx-0 position-relative " style="height: 90%;margin-top: 0">
 
         <div align="center">
             <caption><h2>List Employee</h2></caption>
-
 
 
             <table id="product_table" class="table table-striped table-bordered" style="width: 100%">
@@ -104,7 +102,7 @@
                 </thead>
                 <tbody>
                 <c:forEach var="data" items="${employeeList}">
-                    <tr>            <%--//<a href="/users?action=view&id=${data.id}">--%>
+                    <tr>
                         <td><c:out value="${data.id}"/> </a></td>
                         <td><c:out value="${data.name}"/></td>
                         <td><c:out value="${data.birthday}"/></td>
@@ -119,148 +117,160 @@
                         <td><c:out value="${data.username}"/></td>
 
                         <td>
+
                             <button type="button" class="btn btn-warning" data-bs-toggle="modal"
                                     data-bs-target="#update${data.id}">
                                 Chỉnh sửa
                             </button>
-                                        <div class="modal fade" id="update${data.id}" tabindex="-1"
-                                             aria-labelledby="exampleModalLabel"
-                                             aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel-update"> Nhân viên</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                                aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        Chỉnh sửa Nhân viên <strong>${data.name}</strong>:
 
-                                                        <form action="/employee?action=edit&id=${data.id}" method="post">
-                                                            <fieldset>
-                                                                <legend>Thông tin Nhân viên</legend>
-                                                                <table class="table table-striped table-bordered"
-                                                                       style="width: 100%">
-                                                                    <tr>
-                                                                        <th>Name Nhân viên :</th>
-                                                                        <td>
-                                                                            <input type="text" name="name"
-                                                                                   value="${data.name}"/>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th>Ngày tháng năm sinh :</th>
-                                                                        <td>
-                                                                            <input type="text" name="birthday"
-                                                                                   value="${data.birthday}"/>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th>CMND :</th>
-                                                                        <td>
-                                                                            <input type="text" name="idCard"
-                                                                                   value="${data.idCard}"/>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th>Lương :</th>
-                                                                        <td>
-                                                                            <input type="text" name="salary"
-                                                                                   value="${data.salary}"/>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th>Phone :</th>
-                                                                        <td>
-                                                                            <input type="text" name="phone"
-                                                                                   value="${data.phone}"/>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th>Email :</th>
-                                                                        <td>
-                                                                            <input type="text" name="email"
-                                                                                   value="${data.email}"/>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th>Address :</th>
-                                                                        <td>
-                                                                            <input type="text" name="address"
-                                                                                   value="${data.address}"/>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th>Position Id :</th>
-                                                                        <td>
-                                                                            <input type="text" name="positionId"
-                                                                                   value="${data.positionId}"/>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th>Education Degree Id :</th>
-                                                                        <td>
-                                                                            <input type="text" name="educationDegreeId"
-                                                                                   value="${data.educationDegreeId}"/>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th>Division Id :</th>
-                                                                        <td>
-                                                                            <input type="text" name="divisionId"
-                                                                                   value="${data.divisionId}"/>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th>username :</th>
-                                                                        <td>
-                                                                            <input type="text" name="username"
-                                                                                   value="${data.username}"/>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-                                                            </fieldset>
-                                                            <div class="modal-footer">
-                                                                <a href="/users" class="btn btn-secondary" data-bs-dismiss="modal">Hủy
-                                                                    bỏ</a>
-                                                                <input type="submit" value="Xác nhận" class="btn btn-warning">
-
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
+                            <div class="modal fade" id="update${data.id}" tabindex="-1"
+                                 aria-labelledby="exampleModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel-update"> Nhân viên</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
                                         </div>
+                                        <div class="modal-body">
+                                            Chỉnh sửa Nhân viên <strong>${data.name}</strong>:
+
+                                            <form action="/employee?action=edit&id=${data.id}" method="post">
+                                                <fieldset>
+                                                    <legend>Thông tin Nhân viên</legend>
+                                                    <table class="table table-striped table-bordered"
+                                                           style="width: 100%">
+                                                        <tr>
+                                                            <th>Name Nhân viên :</th>
+                                                            <td>
+                                                                <input type="text" name="name"
+                                                                       value="${data.name}"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Ngày tháng năm sinh :</th>
+                                                            <td>
+                                                                <input  type="date" name="birthday" style="width: 84%"
+                                                                       value = "${data.birthday}"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>CMND :</th>
+                                                            <td>
+                                                                <input type="text" name="idCard"
+                                                                       value="${data.idCard}"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Lương :</th>
+                                                            <td>
+                                                                <input type="text" name="salary"
+                                                                       value="${data.salary}"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Phone :</th>
+                                                            <td>
+                                                                <input type="text" name="phone"
+                                                                       value="${data.phone}"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Email :</th>
+                                                            <td>
+                                                                <input type="text" name="email"
+                                                                       value="${data.email}"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Address :</th>
+                                                            <td>
+                                                                <input type="text" name="address"
+                                                                       value="${data.address}"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Position Id :</th>
+                                                            <td>
+                                                                <input type="text" name="positionId"
+                                                                       value="${data.positionId}"/>
+
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Education Degree Id :</th>
+                                                            <td>
+                                                                <input type="text" name="educationDegreeId"
+                                                                       value="${data.educationDegreeId}"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Division Id :</th>
+                                                            <td>
+<%--                                                                <input type="text" name="divisionId"--%>
+<%--                                                                       value="${data.divisionId}"/>--%>
+                                                                <select name="divisionId" style="width: 84%;">
+                                                                    <option value="1" ${data.divisionId == 1? "selected":""}> Sale-Marketing </option>
+                                                                    <option value="2"${data.divisionId == 2? "selected":""}> Hành chính</option>
+                                                                    <option value="3"${data.divisionId == 3? "selected":""}> Phục vụ</option>
+                                                                    <option value="4"${data.divisionId == 4? "selected":""}> Quản lý </option>
+                                                                </select>
+
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>username :</th>
+                                                            <td>
+                                                                <input type="text" name="username"
+                                                                       value="${data.username}"/>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </fieldset>
+                                                <div class="modal-footer">
+                                                    <a href="/users" class="btn btn-secondary" data-bs-dismiss="modal">Hủy
+                                                        bỏ</a>
+                                                    <input type="submit" value="Xác nhận" class="btn btn-warning">
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                     data-bs-target="#delete${data.id}">Xóa
                             </button>
 
-                                        <div class="modal fade" id="delete${data.id}" tabindex="-1"
-                                             aria-labelledby="exampleModalLabel"
-                                             aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel-delete">Xóa nhân viên</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                                aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        Xóa nhân viên <strong>${data.name}</strong>?
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <a href="/employee" class="btn btn-secondary" data-bs-dismiss="modal">Hủy
-                                                            bỏ</a>
-                                                        <a class="btn btn-danger"
-                                                           href="/employee?action=delete&id=${data.id}">Delete</a>
-                                                    </div>
-                                                </div>
-                                            </div>
+                            <div class="modal fade" id="delete${data.id}" tabindex="-1"
+                                 aria-labelledby="exampleModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel-delete">Xóa nhân viên</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
                                         </div>
+                                        <div class="modal-body">
+                                            Xóa nhân viên <strong>${data.name}</strong>?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="/employee" class="btn btn-secondary" data-bs-dismiss="modal">Hủy
+                                                bỏ</a>
+                                            <a class="btn btn-danger"
+                                               href="/employee?action=delete&id=${data.id}">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </td>
 
                     </tr>
+
                 </c:forEach>
 
                 </tbody>

@@ -25,6 +25,11 @@ public class EmployeeService implements IEmployeeService {
     }
 
     @Override
+    public Employee selectEmployeeId(int id) {
+        return employeeRepo.selectEmployeeId(id);
+    }
+
+    @Override
     public boolean deleteEmployee(int id) {
         return employeeRepo.deleteEmployee(id);
     }

@@ -56,9 +56,12 @@ public class EmployeeServlet extends HttpServlet {
         int educationDegreeId = Integer.parseInt(request.getParameter("educationDegreeId"));
         int divisionId = Integer.parseInt(request.getParameter("divisionId"));
         String username = request.getParameter("username");
-        Employee employee = new Employee(name, birthday, idCard, salary,
+
+        Employee employee = new Employee(id ,name, birthday, idCard, salary,
                 phone, email, address, positionId, educationDegreeId, divisionId, username);
+
         employeeService.updateEmployee(employee);
+
         request.setAttribute("mess", "Chỉnh sửa  thành công");
         employeeList(request,response);
 
@@ -122,7 +125,6 @@ public class EmployeeServlet extends HttpServlet {
     }
 
     private void searchEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         List<Employee> employeeList = employeeService.selectEmployeeName(request.getParameter("searchName"));
         request.setAttribute("employeeList", employeeList);
 

@@ -10,6 +10,7 @@ public interface IEmployeeRepo {
     public List<Employee> selectAllEmployee();
 
     public List<Employee> selectEmployeeName(String name);
+    public Employee selectEmployeeId(int id);
 
     public boolean deleteEmployee(int id);
 

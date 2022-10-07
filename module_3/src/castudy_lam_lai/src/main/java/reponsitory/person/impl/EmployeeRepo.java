@@ -8,15 +8,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeRepo implements IEmployeeRepo {
+
     private String jdbcURL = "jdbc:mysql://localhost:3306/furama_case_study_2";
     private String jdbcUsername = "root";
     private String jdbcPassword = "12345678Hai$$$";
 
-    private static final String INSERT_USERS_SQL = "SELECT * FROM employee;\n" +
-            "INSERT INTO `furama_case_study_2`.`employee` (`name`, `date_of_birth`, `id_card`, `salary`, `phone_number`," +
-            " `emai`, `eddress`, `position_id`, `education_degree_id`, `division_id`, `username`) VALUES (?, ?, ?,?,?, ?, ?, ?,?, ?, ?);\n";
+    private static final String INSERT_USERS_SQL = "INSERT INTO `furama_case_study_2`.`employee` (" +
+            "`name`, `date_of_birth`, `id_card`, `salary`, `phone_number`, `emai`, `eddress`," +
+            " `position_id`, `education_degree_id`, `division_id`, `username`) " +
+            "VALUES (?,?, ?, ?,?,?, ?, ?, ?, ?, ? );";
     private static final String SELECT_EMPLOYEE_NAME = "SELECT * FROM employee WHERE name like ?;";
     private static final String SELECT_EMPLOYEE = "select * from employee where status_display = 0; ";
+    private static final String EDIT_EMPLOYEE = "UPDATE employee set name = ?, date_of_birth=?, id_card = ?, salary = ? ," +
+            " phone_number =?, emai = ?, eddress =?, position_id =  ?, education_degree_id = ?, division_id =?, username =? where id =?;";
+    private static final String SELECT_EMPLOYEE_ID = "SELECT * FROM employee WHERE id = ?;";
 
     protected Connection getConnection() {
         Connection connection = null;
@@ -41,16 +46,14 @@ public class EmployeeRepo implements IEmployeeRepo {
             prepareStatement.setString(5, employee.getPhone());
             prepareStatement.setString(6, employee.getEmail());
             prepareStatement.setString(7, employee.getAddress());
-            prepareStatement.setInt(8, (employee.getPositionId()));
-            prepareStatement.setInt(9, (employee.getEducationDegreeId()));
-            prepareStatement.setInt(10, (employee.getDivisionId()));
+            prepareStatement.setString(8, String.valueOf((employee.getPositionId())));
+            prepareStatement.setString(9, String.valueOf((employee.getEducationDegreeId())));
+            prepareStatement.setString(10, String.valueOf((employee.getDivisionId())));
             prepareStatement.setString(11, employee.getUsername());
             prepareStatement.executeUpdate();
-            System.out.println("thêm xong...............");
         } catch (SQLException e) {
             printSQLException(e);
         }
-
     }
 
     public List<Employee> selectEmployeeName(String nameInput) {
@@ -80,6 +83,34 @@ public class EmployeeRepo implements IEmployeeRepo {
         }
         return employeeList;
     }
+
+    public Employee selectEmployeeId(int id) {
+        Employee employee = null;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_EMPLOYEE_ID)) {
+            preparedStatement.setString(1, String.valueOf(id));
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                String name = rs.getString("name");
+                String birthday = rs.getString("date_of_birth");
+                String idCard = rs.getString("id_card");
+                double salary = Double.parseDouble(rs.getString("salary"));
+                String phone = rs.getString("phone_number");
+                String email = rs.getString("emai");
+                String address = rs.getString("eddress");
+                int positionId = Integer.parseInt(rs.getString("position_id"));
+                int educationDegreeId = Integer.parseInt(rs.getString("education_degree_id"));
+                int divisionId = Integer.parseInt(rs.getString("division_id"));
+                String username = rs.getString("username");
+                employee = new Employee(id, name, birthday, idCard, salary,
+                        phone, email, address, positionId, educationDegreeId, divisionId, username);
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return employee;
+    }
+
 
     @Override
     public List<Employee> selectAllEmployee() {
@@ -128,30 +159,28 @@ public class EmployeeRepo implements IEmployeeRepo {
     @Override
     public boolean updateEmployee(Employee employee) {
         boolean rowUpdated = false;
-        try (Connection connection = getConnection();
-             CallableStatement callableStatement = connection.prepareCall("{call EDIT_EMPLOYEE (?,?,?,?,?,?,?,?,?,?,?) }")
-        ) {
-            callableStatement.setString(1, employee.getName());
-            callableStatement.setString(2, employee.getBirthday());
-            callableStatement.setString(3, employee.getIdCard());
-            callableStatement.setDouble(4, (employee.getSalary()));
-            callableStatement.setString(5, employee.getPhone());
-            callableStatement.setString(6, employee.getEmail());
-            callableStatement.setString(7, employee.getAddress());
-            callableStatement.setInt(8, (employee.getPositionId()));
-            callableStatement.setInt(9, (employee.getEducationDegreeId()));
-            callableStatement.setInt(10, (employee.getDivisionId()));
-            callableStatement.setString(11, employee.getUsername());
+        Connection connection = getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(EDIT_EMPLOYEE);
+            preparedStatement.setString(1, employee.getName());
+            preparedStatement.setString(2, employee.getBirthday());
+            preparedStatement.setString(3, employee.getIdCard());
+            preparedStatement.setDouble(4, (employee.getSalary()));
+            preparedStatement.setString(5, employee.getPhone());
+            preparedStatement.setString(6, employee.getEmail());
+            preparedStatement.setString(7, employee.getAddress());
+            preparedStatement.setInt(8, (employee.getPositionId()));
+            preparedStatement.setInt(9, (employee.getEducationDegreeId()));
+            preparedStatement.setInt(10, (employee.getDivisionId()));
+            preparedStatement.setString(11, employee.getUsername());
+            preparedStatement.setString(12, String.valueOf(employee.getId()));
 
-            rowUpdated = callableStatement.executeUpdate() > 0;
+            rowUpdated = preparedStatement.executeUpdate() > 0;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return rowUpdated;
-
     }
-
-
     private void printSQLException(SQLException ex) {
         for (Throwable e : ex) {
             if (e instanceof SQLException) {

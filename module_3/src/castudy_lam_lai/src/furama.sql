@@ -249,16 +249,41 @@ select * from employee
 where status_display = 0;
 
 DELIMITER $$
-CREATE PROCEDURE EDIT_EMPLOYEE(in id_delete int)
-BEGIN
+CREATE PROCEDURE EDIT_EMPLOYEE(
+	in id INT,
+	in name varchar(45),
+    in date_of_birth date,
+    in id_card varchar(45),
+    in salary double,
+    in phone_number varchar(45),
+    in emai varchar(45),
+    in eddress varchar(45),
+    in position_id int,
+    in education_degree_id int,
+    in division_id int,
+    in username VARCHAR(255))
+    BEGIN
 update employee 
-set status_display = 1
-where id =id_delete;
+set name =name, 
+date_of_birth =date_of_birth,
+id_card  =id_card ,
+phone_number  = phone_number ,
+date_of_birth =date_of_birth,
+emai  =emai ,
+eddress  =eddress ,
+position_id  =position_id ,
+education_degree_id  =education_degree_id ,
+division_id  =division_id ,
+username  =username 
+where id =id;
 end $$
 DELIMITER ;
 
-
-
+UPDATE employee set
+name = "việt", date_of_birth='1970-11-07',
+ id_card = '123321456', salary = '10000000' , phone_number ='0901234121', emai = 'annguyen@gmail.com',
+ eddress ='295 Nguyễn Tất Thành, Đà Nẵng' , position_id =  '1' , education_degree_id =  '3', division_id ='1', username = NULL, status_display = 0
+ Where id = 2;
 
 
 
